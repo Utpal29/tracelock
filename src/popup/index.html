@@ -1,0 +1,132 @@
+<!-- Popup UI for TraceLock. Renders current tab privacy data. -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>TraceLock</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <main class="popup" data-risk="unknown">
+      <header class="hero">
+        <div class="hero__brand">
+          <div class="hero__logo" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false">
+              <path
+                d="M12 1.75a5.25 5.25 0 0 0-5.25 5.25v2.25h-.5A2.25 2.25 0 0 0 4 11.5v7a3.75 3.75 0 0 0 3.75 3.75h8.5A3.75 3.75 0 0 0 20 18.5v-7a2.25 2.25 0 0 0-2.25-2.25h-.5V7A5.25 5.25 0 0 0 12 1.75Zm0 1.5A3.75 3.75 0 0 1 15.75 7v2.25h-7.5V7A3.75 3.75 0 0 1 12 3.25ZM7.25 10.5h9.5c.414 0 .75.336.75.75v7a2.25 2.25 0 0 1-2.25 2.25h-8.5A2.25 2.25 0 0 1 4.5 18.25v-7c0-.414.336-.75.75-.75Z"
+              />
+            </svg>
+          </div>
+          <div class="hero__meta">
+            <h1 class="hero__title">TraceLock</h1>
+            <span class="hero__subtitle" id="current-url">Loading...</span>
+          </div>
+        </div>
+        <aside class="hero__risk-card" id="risk-card">
+          <span class="hero__risk-label">Risk Level</span>
+          <span class="hero__risk-value" id="risk-level">--</span>
+          <span class="hero__risk-subtext" id="risk-subtext">Awaiting data</span>
+        </aside>
+      </header>
+      <section class="insights">
+        <article class="insights__card">
+          <header class="insights__header">
+            <span class="insights__icon insights__icon--requests" aria-hidden="true"></span>
+            <span class="insights__title">Total Requests</span>
+          </header>
+          <div class="insights__value" id="breakdown-total">0</div>
+          <p class="insights__hint">Captured for this tab</p>
+        </article>
+        <article class="insights__card">
+          <header class="insights__header">
+            <span class="insights__icon insights__icon--trackers" aria-hidden="true"></span>
+            <span class="insights__title">Tracker Hits</span>
+          </header>
+          <div class="insights__value" id="breakdown-trackers">0</div>
+          <p class="insights__hint">Across recent requests</p>
+        </article>
+        <article class="insights__card">
+          <header class="insights__header">
+            <span class="insights__icon insights__icon--permissions" aria-hidden="true"></span>
+            <span class="insights__title">Permissions Flagged</span>
+          </header>
+          <div class="insights__value" id="breakdown-permissions">0</div>
+          <p class="insights__hint">Triggered by this page</p>
+        </article>
+        <article class="insights__card insights__card--wide">
+          <header class="insights__header">
+            <span class="insights__icon insights__icon--top-tracker" aria-hidden="true"></span>
+            <span class="insights__title">Top Tracker</span>
+          </header>
+          <div class="insights__value insights__value--muted" id="breakdown-top-tracker">
+            None detected
+          </div>
+          <p class="insights__hint">Domain with most tracking hits</p>
+        </article>
+      </section>
+      <section class="panel panel--categories" id="categories-panel">
+        <header class="panel__header panel__header--collapsible">
+          <div>
+            <h2 class="panel__title">Threat Categories</h2>
+            <span class="panel__subtitle">Classified using tracker taxonomy</span>
+          </div>
+          <button type="button" class="panel__toggle" data-panel-toggle="categories" aria-expanded="true">
+            Collapse
+          </button>
+        </header>
+        <div class="category-grid" id="category-grid"></div>
+      </section>
+      <section class="panel panel--history">
+        <header class="panel__header">
+          <h2 class="panel__title">Last 7 Visits</h2>
+          <span class="panel__subtitle">Trackers detected per session</span>
+        </header>
+        <div class="history">
+          <div class="history__sparkline" id="history-sparkline"></div>
+          <ul class="history__list" id="history-list"></ul>
+        </div>
+      </section>
+      <section class="panel panel--permissions">
+        <header class="panel__header">
+          <h2 class="panel__title">Permissions Used</h2>
+          <span class="panel__subtitle">Signals reported in real time</span>
+        </header>
+        <div class="chip-list" id="permissions-list"></div>
+      </section>
+      <section class="panel panel--guidance">
+        <header class="panel__header">
+          <h2 class="panel__title">Proactive Guidance</h2>
+          <span class="panel__subtitle">Recommended next steps for this site</span>
+        </header>
+        <ul class="guidance-list" id="guidance-list"></ul>
+      </section>
+      <section class="panel panel--requests">
+        <header class="panel__header">
+          <div>
+            <h2 class="panel__title">Recent Network Timeline</h2>
+            <span class="panel__subtitle">Latest 20 requests in reverse order</span>
+          </div>
+        </header>
+        <div class="filters" id="timeline-controls">
+          <div class="filters__search">
+            <input
+              type="search"
+              id="request-search"
+              class="filters__input"
+              placeholder="Search domain or path…"
+              autocomplete="off"
+            />
+          </div>
+          <div class="filters__chips" id="tracker-filter-group">
+            <button type="button" class="filter-chip is-active" data-filter-tracker="all">All</button>
+            <button type="button" class="filter-chip" data-filter-tracker="tracker">Trackers</button>
+            <button type="button" class="filter-chip" data-filter-tracker="normal">Normal</button>
+          </div>
+          <div class="filters__chips filters__chips--methods" id="method-filter-group"></div>
+        </div>
+        <ul class="timeline" id="requests-list"></ul>
+      </section>
+    </main>
+    <script src="popup.js"></script>
+  </body>
+</html>
