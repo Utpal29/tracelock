@@ -13,13 +13,15 @@ TraceLock is a Manifest V3 browser extension for Chrome/Edge that exposes the in
 
 ## Screenshots
 
-![TraceLock popup overview showing risk level and quick stats](docs/screenshots/tracelock-dashboard.png)
+<div align="center">
+  <img src="docs/screenshots/tracelock-dashboard.png" alt="TraceLock popup overview showing risk level and quick stats" width="520" />
+  <img src="docs/screenshots/tracelock-guidance.png" alt="Proactive guidance and permission alerts surfaced in the popup" width="520" />
+</div>
 
-![Recent network timeline with tracker badges and request metadata](docs/screenshots/tracelock-timeline.png)
-
-![Filters and search controls for narrowing down network activity](docs/screenshots/tracelock-filters.png)
-
-![Proactive guidance and permission alerts surfaced in the popup](docs/screenshots/tracelock-guidance.png)
+<div align="center">
+  <img src="docs/screenshots/tracelock-timeline.png" alt="Recent network timeline with tracker badges and request metadata" width="320" />
+  <img src="docs/screenshots/tracelock-filters.png" alt="Filters and search controls for narrowing down network activity" width="320" />
+</div>
 
 ## Project Structure
 
